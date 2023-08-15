@@ -1,0 +1,46 @@
+﻿@model Edgias.Humano.WebApp.Pages.Employees.WorkExperienceModalModel
+
+<div class="modal fade" id="work-experience-modal">
+    <div class="modal-dialog modal-lg">
+        <form method="post" asp-page-handler="WorkExperience">
+            @Html.HiddenFor(we => we.EmployeeId)
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Work Experience</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="JobTitleId" class="col-sm-3 col-form-label">Job Title <code>*</code></label>
+                        <select class="form-control" asp-for="JobTitleId" asp-items="Model.JobTitles">
+                            <option value="">Please select</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GradeId" class="col-sm-3 col-form-label">Grade <code>*</code></label>
+                        <select class="form-control" asp-for="GradeId" asp-items="Model.Grades">
+                            <option value="">Please select</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="col-sm-2 col-form-label">Start Date <code>*</code></label>
+                        <input type="date" class="form-control form-control-sm" asp-for="StartDate" placeholder="Enter date">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="col-sm-2 col-form-label">End Date </label>
+                        <input type="date" class="form-control form-control-sm" asp-for="EndDate" placeholder="Enter date">
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

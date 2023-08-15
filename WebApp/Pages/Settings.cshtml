@@ -1,0 +1,125 @@
+﻿@page
+@model Edgias.Humano.WebApp.Pages.SettingsModel
+@{
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Settings</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Settings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Salutations
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body clearfix">
+                        <blockquote class="quote-secondary">
+                            <p>Create, edit, view, delete salutations.</p>
+                            <small><a asp-page="/Salutations/Index" class="btn bg-gradient-secondary btn-sm">View All</a></small>
+                        </blockquote>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Job Titles
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body clearfix">
+                        <blockquote class="quote-secondary">
+                            <p>Create, edit, view, delete job titles.</p>
+                            <small><a asp-page="/JobTitles/Index" class="btn bg-gradient-secondary btn-sm">View All</a></small>
+                        </blockquote>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Grades
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body clearfix">
+                        <blockquote class="quote-secondary">
+                            <p>Create, edit, view, delete job grades.</p>
+                            <a asp-page="/Grades/Index" class="btn bg-gradient-secondary btn-sm">View All</a>
+                        </blockquote>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Departments
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body clearfix">
+                        <blockquote class="quote-secondary">
+                            <p>Create, edit, view, delete departments.</p>
+                            <small><a asp-page="/Departments/Index" class="btn bg-gradient-secondary btn-sm">View All</a></small>
+                        </blockquote>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Leave Categories
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body clearfix">
+                        <blockquote class="quote-secondary">
+                            <p>Create, edit, view, delete leave categories.</p>
+                            <small><a asp-page="/LeaveCategories/Index" class="btn bg-gradient-secondary btn-sm">View All</a></small>
+                        </blockquote>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+            
+        </div>
+    </div>
+</section>

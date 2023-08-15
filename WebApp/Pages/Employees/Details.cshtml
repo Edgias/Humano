@@ -1,0 +1,442 @@
+﻿@page
+@model Edgias.Humano.WebApp.Pages.Employees.DetailsModel
+@{
+    ViewData["Title"] = "Employee 360";
+    var workExperience = Model.Employee.WorkExperiences;
+    var timesheets = Model.Employee.Timesheets;
+    var checkIns = Model.Employee.CheckIns;
+    var leave = Model.Employee.Leaves;
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Employee Profile</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Employee Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="card card-secondary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="/img/user.jpg" alt="User profile picture">
+                        </div>
+                        <h3 class="profile-username text-center">@Model.Employee.FirstName @Model.Employee.LastName</h3>
+                        <p class="text-muted text-center">@Model.Employee.CurrentPosition</p>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Salary</b> <a class="float-right text-danger">$@Model.Employee.Salary</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Date Joined</b> <a class="float-right">@Model.Employee.DateJoined.ToString("dd-MMM-yyyy")</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Gender</b> <a class="float-right">Male</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Age</b> <a class="float-right">@Model.Employee.Age</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Mobile</b> <a class="float-right">@Model.Employee.Mobile</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Email</b> <a class="float-right">@Model.Employee.Email</a>
+                            </li>
+                            
+                        </ul>
+                        <a href="#" class="btn btn-info btn-block"><b>Print Card</b></a>
+                    </div>
+
+                </div>
+
+
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">About Me</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                        <p class="text-muted">
+                            @Model.Employee.ResidentialAddress?.Street, @Model.Employee.ResidentialAddress?.City
+                        </p>
+                        <hr>
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Residential Address</strong>
+                        <p class="text-muted">
+                            @Model.Employee.ResidentialAddress?.Street, @Model.Employee.ResidentialAddress?.City
+                        </p>
+                        <hr>
+                        <strong><i class="fas fa-pencil-alt mr-1"></i> Qualifications</strong>
+                        <p class="text-muted">
+                            @*@if(Model.Member.Dependants.Any())
+                            {
+                                foreach (var item in Model.Member.Dependants)
+                                {
+                                    <span class="tag tag-info">@item.FirstName @item.LastName</span>
+                                }
+                            }*@
+                        </p>
+                        @*<hr>
+                        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>*@
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#experience" data-toggle="tab">Work Expereience</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#checkin" data-toggle="tab">Check Ins</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#leave" data-toggle="tab">Leave</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#timesheets" data-toggle="tab">Timesheets</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="activity">
+
+                                <div class="timeline timeline-inverse">
+
+                                    <div class="time-label">
+                                        <span class="bg-secondary">
+                                            @DateTime.Now.Day @DateTime.Now.ToString("MMM"). @DateTime.Now.Year
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <i class="fas fa-arrow-circle-right bg-info"></i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="far fa-clock"></i> 3 days ago</span>
+                                            <h3 class="timeline-header border-0">
+                                                <a href="#">@Model.Employee.FirstName</a> made a payment
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                   <div class="time-label">
+                                        <span class="bg-secondary">
+                                            @DateTime.Now.AddDays(-3).Day @DateTime.Now.AddDays(-3).ToString("MMM"). @DateTime.Now.Year
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <i class="fas fa-arrow-circle-right bg-info"></i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="far fa-clock"></i> 3 days ago</span>
+                                            <h3 class="timeline-header border-0">
+                                                <a href="#">@Model.Employee.FirstName</a> made a payment
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <i class="far fa-clock bg-gray"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" id="experience">
+                                <div class="row">
+                                    <div class="col-12">
+                                       @if(workExperience.Any())
+                                        {
+                                             <div class="card">
+                                            <div class="card-header">
+                                                <div class="card-title">
+                                                   <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Position
+                                                   </button>
+                                                </div>
+                                                <div class="card-tools mt-1">
+                                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                                        <div class="input-group-append">
+                                                            <button type="submit" class="btn btn-default">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-hover text-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Job Title</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                                <th>Salary</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in workExperience)
+                                                            {
+                                                                <tr>
+                                                                    <td>@item.JobTitle</td>
+                                                                    <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>@item.EndDate?.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>$@item.Salary</td>
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                        </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="card">
+
+                                                <div class="card-body">
+                                                    <div class="block text-center" style="margin:20px">
+                                                        <object data="~/img/no_data.svg" width="300" height="100"></object>
+                                                        <br />
+                                                        <span class="h3 text-muted">No Payments</span><br />
+                                                        <span class="text-muted text-sm">Use the 'Add Position' button below to add a position.</span><br />
+                                                        <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Position
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="checkin">
+                                 <div class="row">
+                                    <div class="col-12">
+                                       @if(checkIns.Any())
+                                        {
+                                             <div class="card">
+                                            <div class="card-header">
+                                                <div class="card-title">
+                                                    <a asp-page="/CheckIn/Create"  asp-route-id="@Model.Employee.Id" 
+                                                    class="btn btn-sm btn-block bg-gradient-primary">
+                                                        <i class="fas fa-plus mr-2"></i>Check in
+                                                    </a>
+                                                </div>
+                                                <div class="card-tools mt-1">
+                                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                                        <div class="input-group-append">
+                                                            <button type="submit" class="btn btn-default">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-hover text-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Date</th>
+                                                                <th>Time In</th>
+                                                                <th>Time Out</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in checkIns)
+                                                            {
+                                                                <tr>
+                                                                    <td>@item.Date.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>
+                                                                        @item.TimeIn
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.TimeOut
+                                                                    </td>
+                                                                    
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                        </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="card">
+
+                                                <div class="card-body">
+                                                    <div class="block text-center" style="margin:20px">
+                                                        <object data="~/img/no_data.svg" width="300" height="100"></object>
+                                                        <br />
+                                                        <span class="h3 text-muted">No Check Ins</span><br />
+                                                        <span class="text-muted text-sm">Use the 'Check in' button below to check in.</span><br />
+                                                        <a asp-page="/CheckIn/Create" asp-route-id="@Model.Employee.Id" class="btn btn-sm bg-gradient-primary mt-2">
+                                                            <i class="fas fa-plus mr-2"></i>Check in
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="leave">
+                                <div class="row">
+                                    <div class="col-12">
+                                       @if(leave.Any())
+                                        {
+                                             <div class="card">
+                                            <div class="card-header">
+                                                <div class="card-title">
+                                                    <a asp-page="/TimeOff/Create"  asp-route-id="@Model.Employee.Id" 
+                                                    class="btn btn-sm btn-block bg-gradient-primary">
+                                                        <i class="fas fa-plus mr-2"></i>Add Leave
+                                                    </a>
+                                                </div>
+                                                <div class="card-tools mt-1">
+                                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                                        <div class="input-group-append">
+                                                            <button type="submit" class="btn btn-default">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-hover text-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Category</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in leave)
+                                                            {
+                                                                <tr>
+                                                                    <td>@item.LeaveCategory</td>
+                                                                    <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>@item.EndDate.ToString("dd-MMM-yyyy")</td>
+                                                                    <td><span class="badge badge-info">@item.LeaveStatus.ToString()</span></td>                                                                    
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                        </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="card">
+
+                                                <div class="card-body">
+                                                    <div class="block text-center" style="margin:20px">
+                                                        <object data="~/img/no_data.svg" width="300" height="100"></object>
+                                                        <br />
+                                                        <span class="h3 text-muted">No Leave</span><br />
+                                                        <span class="text-muted text-sm">Use the 'Add Leave' button below to add time off.</span><br />
+                                                        <a asp-page="/TimeOff/Create" asp-route-id="@Model.Employee.Id" class="btn btn-sm bg-gradient-primary mt-2">
+                                                            <i class="fas fa-plus mr-2"></i>Add Leave
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="timesheets">
+                                <form class="form-horizontal">
+                                    <div class="form-group row">
+                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<partial name="_WorkExperienceModal" model="@Model.WorkExperienceModalModel" />

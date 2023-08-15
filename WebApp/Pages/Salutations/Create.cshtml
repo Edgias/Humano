@@ -1,0 +1,77 @@
+﻿@page
+@model Edgias.Humano.WebApp.Pages.Salutations.CreateModel
+@{
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>New Salutation</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-page="/Salutations/Index">Salutations</a></li>
+                    <li class="breadcrumb-item active">New Salutation</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-info">
+
+                    <form id="addSalutationForm" method="post" class="form-horizontal">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Name" class="col-sm-2 col-form-label">Name <code>*</code></label>
+                                <input type="text" class="form-control form-control-sm" asp-for="Name" placeholder="Enter name">
+                            </div>
+                            
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-sm bg-gradient-primary">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $('#addSalutationForm').validate({
+                rules: {
+                    Name: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    StartDate: {
+                        required: "Please enter salutation"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+}

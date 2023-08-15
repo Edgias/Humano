@@ -1,0 +1,227 @@
+﻿@page
+@model Edgias.Humano.WebApp.Pages.Employees.CreateModel
+@{
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>New Employee</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Employees/Index">Employees</a></li>
+                    <li class="breadcrumb-item active">New Employee</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-info">
+                    
+                    <form id="addEmployeeForm" method="post" class="form-horizontal">
+                        <div class="card-body">
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="FirstName" class="col-sm-3 col-form-label">First Name <code>*</code></label>
+                                        <input type="text" class="form-control form-control-sm" asp-for="FirstName" placeholder="Enter first name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="SalutationId" class="col-sm-3 col-form-label">Salutation <code>*</code></label>
+                                        <select class="form-control" asp-for="SalutationId" asp-items="Model.Salutations">
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="DateJoined" class="col-sm-3 col-form-label">Date Joined <code>*</code></label>
+                                        <input type="date" class="form-control form-control-sm" asp-for="DateJoined" placeholder="Enter date joined">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="DepartmentId" class="col-sm-3 col-form-label">Department <code>*</code></label>
+                                        <select class="form-control" asp-for="DepartmentId" asp-items="Model.Departments">
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Mobile" class="col-sm-3 col-form-label">Mobile <code>*</code></label>
+                                        <input type="text" class="form-control form-control-sm" asp-for="Mobile" placeholder="Enter mobile">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="EmployeeType" class="col-sm-3 col-form-label">Employee Type <code>*</code></label>
+                                        <select class="form-control" asp-for="EmployeeType" asp-items="Html.GetEnumSelectList<Edgias.Humano.ApplicationCore.Entities.EmployeeType>()">
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="LastName" class="col-sm-3 col-form-label">Last Name <code>*</code></label>
+                                        <input type="text" class="form-control form-control-sm" asp-for="LastName" placeholder="Enter last name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="DateOfBirth" class="col-sm-3 col-form-label">Date of Birth <code>*</code></label>
+                                        <input type="date" class="form-control form-control-sm" asp-for="DateOfBirth" placeholder="Enter date of birth">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Gender" class="col-sm-2 col-form-label">Gender <code>*</code></label>
+                                        <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Edgias.Humano.ApplicationCore.Entities.Gender>()">
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="NationalId" class="col-sm-4 col-form-label">National ID Number <code>*</code></label>
+                                        <input type="text" class="form-control form-control-sm" asp-for="NationalId" placeholder="Enter id number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Email" class="col-sm-3 col-form-label">Email </label>
+                                        <input type="text" class="form-control form-control-sm" asp-for="Email" placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="ManagerId" class="col-sm-3 col-form-label">Manager </label>
+                                        <select class="form-control" asp-for="ManagerId" asp-items="Model.Managers">
+                                            <option value="">Please select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Street" class="col-sm-2 col-form-label">Street <code>*</code></label>
+                                <input type="text" class="form-control form-control-sm" asp-for="Street" placeholder="Enter street">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="City" class="col-sm-2 col-form-label">City <code>*</code></label>
+                                        <input type="text" class="form-control form-control-sm" asp-for="City" placeholder="Enter city">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="State" class="col-sm-2 col-form-label"></label>
+                                        <input type="text" class="form-control form-control-sm" asp-for="State" placeholder="Enter state">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-sm bg-gradient-primary">Create</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/lib/jquery.validate.min.js"></script>
+    <script src="~/lib/additional-methods.min.js"></script>
+    <script>
+        $(function () {
+  
+  $('#addEmployeeForm').validate({
+    rules: {
+        FirstName: {
+        required: true,
+      },  
+      LastName: {
+        required: true,
+      },  
+      DateJoined: {
+        required: true,
+      },  
+      DateOfBirth: {
+        required: true,
+      },  
+      NationalId: {
+        required: true,
+      }, 
+      Mobile: {
+        required: true,
+      }, 
+      Email: {
+        required: false,
+        email: true
+      },  
+      DepartmentId: {
+        required: true,
+      }, 
+      Street: {
+        required: true,
+      }, 
+      City: {
+        required: true,
+      }, 
+      Gender: {
+        required: true,
+      }, 
+      EmployeeType: {
+        required: true,
+      }, 
+    },
+    messages: {
+        FirstName: {
+        required: "Please enter first name"
+      },
+      LastName: {
+        required: "Please enter last name"
+      },
+      DateJoined: {
+        required: "Please enter date joined"
+      },
+      DateOfBirth: {
+        required: "Please enter date of birth"
+      },
+      NationalId: {
+        required: "Please enter id number"
+      },
+      DepartmentId: {
+        required: "Please select department"
+      },
+      Mobile: {
+        required: "Please enter mobile number"
+      },
+      Street: {
+        required: "Please enter street number"
+      },
+      City: {
+        required: "Please enter city"
+      },
+      Gender: {
+        required: "Please select gender"
+      },
+      EmployeeType: {
+        required: "Please select employee type"
+      },
+      Email: {
+        email: "Please enter a valid email"
+      }
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
+    </script>
+}
+

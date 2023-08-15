@@ -1,0 +1,94 @@
+﻿@page
+@model Edgias.Humano.WebApp.Pages.CheckIns.CreateModel
+@{
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Check In</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-page="/CheckIn/Index">Check Ins</a></li>
+                    <li class="breadcrumb-item active">Check In</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-info">
+
+                    <form id="checkInForm" method="post" class="form-horizontal">
+                        @Html.HiddenFor(d => d.EmployeeId)
+                        <div class="card-body">
+                            
+                            <div class="form-group">
+                                <label asp-for="Date" class="col-sm-2 col-form-label">Date <code>*</code></label>
+                                <input type="date" class="form-control form-control-sm" asp-for="Date" placeholder="Enter date">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TimeIn" class="col-sm-2 col-form-label">Time In <code>*</code></label>
+                                <div class="input-group date" id="timepicker" data-target-input="nearest">
+                                    <input type="text" asp-for="TimeIn" class="form-control datetimepicker-input" data-target="#timepicker" />
+                                    <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-sm bg-gradient-primary">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $('#checkInForm').validate({
+                rules: {
+                    Date: {
+                        required: true,
+                    },
+                    TimeIn: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    Date: {
+                        required: "Please enter start date"
+                    },
+                    TimeIn: {
+                        required: "Please enter time in"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+}
