@@ -7,10 +7,10 @@ namespace Edgias.Humano.WebApp.Pages.Timesheets
     public class CreateModel : PageModel
     {
         [BindProperty]
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; } = default!;
 
         [BindProperty]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
         [BindProperty]
         public int NumberOfHours { get; set; }

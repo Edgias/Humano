@@ -1,5 +1,5 @@
 ﻿@page
-@model Edgias.Humano.WebApp.Pages.Timesheets.CreateModel
+@model CreateModel
 @{
 }
 
@@ -36,7 +36,7 @@
                             
                             <div class="form-group">
                                 <label asp-for="NumberOfHours" class="col-sm-2 col-form-label">Number of Hours <code>*</code></label>
-                                <input type="date" class="form-control form-control-sm" asp-for="NumberOfHours" placeholder="Enter number of hours">
+                                <input type="number" class="form-control form-control-sm" asp-for="NumberOfHours" placeholder="Enter number of hours">
                             </div>
                             <div class="form-group">
                                 <label asp-for="Description" class="col-sm-3 col-form-label">Description <code>*</code></label>

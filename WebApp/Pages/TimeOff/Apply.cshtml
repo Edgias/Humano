@@ -1,5 +1,5 @@
 ﻿@page
-@model Edgias.Humano.WebApp.Pages.TimeOff.ApplyModel
+@model ApplyModel
 @{
 }
 
@@ -48,11 +48,11 @@
                                 <label asp-for="EndDate" class="col-sm-2 col-form-label">End Date <code>*</code></label>
                                 <input type="date" class="form-control form-control-sm" asp-for="EndDate" placeholder="Enter end date">
                             </div>
-                            <div id="half-day-div" class="form-group hidden">
+                            <div id="half-day-div" class="form-group" hidden>
                                 <label asp-for="HalfDay" class="col-sm-2 col-form-label">Date <code>*</code></label>
                                 <input type="date" class="form-control form-control-sm" asp-for="HalfDay" placeholder="Enter end date">
                             </div>
-                            <div id="hour-period-div" class="form-group hidden">
+                            <div id="hour-period-div" class="form-group" hidden>
                                 <label asp-for="HourPeriod" class="col-sm-3 col-form-label">AM/PM <code>*</code></label>
                                 <select class="form-control" asp-for="HourPeriod" asp-items="Html.GetEnumSelectList<Edgias.Humano.ApplicationCore.Entities.HourPeriod>()">
                                     <option value="">Please select</option>

@@ -12,10 +12,10 @@ namespace Edgias.Humano.WebApp.Pages.TimeOff
         public Guid EmployeeId { get; set; }
 
         [BindProperty]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
 
         [BindProperty]
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; } 
 
         [BindProperty]
         public Guid LeaveCategoryId { get; set; }
@@ -30,7 +30,6 @@ namespace Edgias.Humano.WebApp.Pages.TimeOff
         public string Duration { get; set; } = string.Empty;
 
         public SelectList? Durations { get; set; }
-
 
         public SelectList? LeaveCategories { get; set; }
 

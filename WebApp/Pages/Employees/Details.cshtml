@@ -1,7 +1,7 @@
 ﻿@page
-@model Edgias.Humano.WebApp.Pages.Employees.DetailsModel
+@model DetailsModel
 @{
-    ViewData["Title"] = "Employee 360";
+    ViewData["Title"] = $"{Model.Employee.FirstName} {Model.Employee.LastName}";
     var workExperience = Model.Employee.WorkExperiences;
     var timesheets = Model.Employee.Timesheets;
     var checkIns = Model.Employee.CheckIns;
