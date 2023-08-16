@@ -1,5 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model QualificationModalModel
+
+<div class="modal fade" id="qualification-modal">
+    <div class="modal-dialog modal-lg">
+        <form method="post" asp-page-handler="Qualification">
+            @Html.HiddenFor(we => we.EmployeeId)
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Qualification</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="School" class="col-sm-2 col-form-label">School <code>*</code></label>
+                        <input type="text" class="form-control form-control-sm" asp-for="School" placeholder="Enter school name">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Level" class="col-sm-2 col-form-label">Qualificafication Level <code>*</code></label>
+                        <select class="form-control" asp-for="Level" asp-items="Html.GetEnumSelectList<Edgias.Humano.ApplicationCore.Entities.QualificationLevel>()">
+                            <option value="">Please select</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Grade" class="col-sm-2 col-form-label">Grade (Results) <code>*</code></label>
+                        <input type="text" class="form-control form-control-sm" asp-for="Grade" placeholder="Enter results">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FieldOfStudy" class="col-sm-3 col-form-label">Description <code>*</code></label>
+                        <textarea rows="5" class="form-control form-control-sm" asp-for="FieldOfStudy" placeholder="Enter field of study"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="col-sm-2 col-form-label">Start Date <code>*</code></label>
+                        <input type="date" class="form-control form-control-sm" asp-for="StartDate" placeholder="Enter date">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="col-sm-2 col-form-label">End Date </label>
+                        <input type="date" class="form-control form-control-sm" asp-for="EndDate" placeholder="Enter date">
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
