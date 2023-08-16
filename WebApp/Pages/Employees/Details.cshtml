@@ -107,6 +107,7 @@
                             <li class="nav-item"><a class="nav-link" href="#checkin" data-toggle="tab">Check Ins</a></li>
                             <li class="nav-item"><a class="nav-link" href="#leave" data-toggle="tab">Leave</a></li>
                             <li class="nav-item"><a class="nav-link" href="#timesheets" data-toggle="tab">Timesheets</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#details" data-toggle="tab">Details</a></li>
                         </ul>
                     </div>
                     <div class="card-body">
@@ -235,10 +236,9 @@
                                              <div class="card">
                                             <div class="card-header">
                                                 <div class="card-title">
-                                                    <a asp-page="/CheckIn/Create"  asp-route-id="@Model.Employee.Id" 
-                                                    class="btn btn-sm btn-block bg-gradient-primary">
-                                                        <i class="fas fa-plus mr-2"></i>Check in
-                                                    </a>
+                                                        <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#check-in-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Check In
+                                                        </button>
                                                 </div>
                                                 <div class="card-tools mt-1">
                                                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -293,9 +293,9 @@
                                                         <br />
                                                         <span class="h3 text-muted">No Check Ins</span><br />
                                                         <span class="text-muted text-sm">Use the 'Check in' button below to check in.</span><br />
-                                                        <a asp-page="/CheckIn/Create" asp-route-id="@Model.Employee.Id" class="btn btn-sm bg-gradient-primary mt-2">
-                                                            <i class="fas fa-plus mr-2"></i>Check in
-                                                        </a>
+                                                        <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#check-in-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Check In
+                                                        </button>
                                                     </div>
                                                 </div>
 
@@ -312,10 +312,9 @@
                                              <div class="card">
                                             <div class="card-header">
                                                 <div class="card-title">
-                                                    <a asp-page="/TimeOff/Create"  asp-route-id="@Model.Employee.Id" 
-                                                    class="btn btn-sm btn-block bg-gradient-primary">
-                                                        <i class="fas fa-plus mr-2"></i>Add Leave
-                                                    </a>
+                                                        <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#leave-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Leave
+                                                        </button>
                                                 </div>
                                                 <div class="card-tools mt-1">
                                                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -365,11 +364,11 @@
                                                     <div class="block text-center" style="margin:20px">
                                                         <object data="~/img/no_data.svg" width="300" height="100"></object>
                                                         <br />
-                                                        <span class="h3 text-muted">No Leave</span><br />
-                                                        <span class="text-muted text-sm">Use the 'Add Leave' button below to add time off.</span><br />
-                                                        <a asp-page="/TimeOff/Create" asp-route-id="@Model.Employee.Id" class="btn btn-sm bg-gradient-primary mt-2">
-                                                            <i class="fas fa-plus mr-2"></i>Add Leave
-                                                        </a>
+                                                        <span class="h3 text-muted">No Leave Requests</span><br />
+                                                        <span class="text-muted text-sm">Use the 'Add Leave' button below to add leave.</span><br />
+                                                        <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#leave-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Leave
+                                                        </button>
                                                     </div>
                                                 </div>
 
@@ -379,50 +378,168 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="timesheets">
-                                <form class="form-horizontal">
-                                    <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                        </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        @if (timesheets.Any())
+                                        {
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="card-title">
+                                                        <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#timesheet-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Timesheet
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-tools mt-1">
+                                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                                            <div class="input-group-append">
+                                                                <button type="submit" class="btn btn-default">
+                                                                    <i class="fas fa-search"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-hover text-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Date</th>
+                                                                <th>Description</th>
+                                                                <th>Number of Hours</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in timesheets)
+                                                            {
+                                                                <tr>
+                                                                    <td>@item.Date.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>@item.Description</td>
+                                                                    <td>@item.NumberOfHours</td>
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="card">
+
+                                                <div class="card-body">
+                                                    <div class="block text-center" style="margin:20px">
+                                                        <object data="~/img/no_data.svg" width="300" height="100"></object>
+                                                        <br />
+                                                        <span class="h3 text-muted">No Timesheets</span><br />
+                                                        <span class="text-muted text-sm">Use the 'Add Timesheet' button below to add timesheet.</span><br />
+                                                        <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#timesheet-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Timesheet
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="offset-sm-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                                </label>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="details">
+                                <form method="post" class="form-horizontal">
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.FirstName" class="col-sm-3 col-form-label">First Name <code>*</code></label>
+                                                    <input type="text" class="form-control form-control-sm" asp-for="Employee.FirstName" placeholder="Enter first name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.SalutationId" class="col-sm-3 col-form-label">Salutation <code>*</code></label>
+                                                    <select class="form-control" asp-for="Employee.SalutationId" asp-items="Model.Employee.Salutations">
+                                                        <option value="">Please select</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.DateJoined" class="col-sm-3 col-form-label">Date Joined <code>*</code></label>
+                                                    <input type="date" class="form-control form-control-sm" asp-for="Employee.DateJoined" placeholder="Enter date joined">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.DepartmentId" class="col-sm-3 col-form-label">Department <code>*</code></label>
+                                                    <select class="form-control" asp-for="Employee.DepartmentId" asp-items="Model.Employee.Departments">
+                                                        <option value="">Please select</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.Mobile" class="col-sm-3 col-form-label">Mobile <code>*</code></label>
+                                                    <input type="text" class="form-control form-control-sm" asp-for="Employee.Mobile" placeholder="Enter mobile">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.EmployeeType" class="col-sm-3 col-form-label">Employee Type <code>*</code></label>
+                                                    <select class="form-control" asp-for="Employee.EmployeeType" asp-items="Html.GetEnumSelectList<Edgias.Humano.ApplicationCore.Entities.EmployeeType>()">
+                                                        <option value="">Please select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.LastName" class="col-sm-3 col-form-label">Last Name <code>*</code></label>
+                                                    <input type="text" class="form-control form-control-sm" asp-for="Employee.LastName" placeholder="Enter last name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.DateOfBirth" class="col-sm-3 col-form-label">Date of Birth <code>*</code></label>
+                                                    <input type="date" class="form-control form-control-sm" asp-for="Employee.DateOfBirth" placeholder="Enter date of birth">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.Gender" class="col-sm-2 col-form-label">Gender <code>*</code></label>
+                                                    <select class="form-control" asp-for="Employee.Gender" asp-items="Html.GetEnumSelectList<Edgias.Humano.ApplicationCore.Entities.Gender>()">
+                                                        <option value="">Please select</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.NationalId" class="col-sm-4 col-form-label">National ID Number <code>*</code></label>
+                                                    <input type="text" class="form-control form-control-sm" asp-for="Employee.NationalId" placeholder="Enter id number">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.Email" class="col-sm-3 col-form-label">Email </label>
+                                                    <input type="text" class="form-control form-control-sm" asp-for="Employee.Email" placeholder="Enter email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.ManagerId" class="col-sm-3 col-form-label">Manager </label>
+                                                    <select class="form-control" asp-for="Employee.ManagerId" asp-items="Model.Employee.Managers">
+                                                        <option value="">Please select</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="offset-sm-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
+
+                                        <div class="form-group">
+                                            <label asp-for="Employee.ResidentialAddress.Street" class="col-sm-2 col-form-label">Street <code>*</code></label>
+                                            <input type="text" class="form-control form-control-sm" asp-for="Employee.ResidentialAddress.Street" placeholder="Enter street">
                                         </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.ResidentialAddress.City" class="col-sm-2 col-form-label">City <code>*</code></label>
+                                                    <input type="text" class="form-control form-control-sm" asp-for="Employee.ResidentialAddress.City" placeholder="Enter city">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label asp-for="Employee.ResidentialAddress.State" class="col-sm-2 col-form-label"></label>
+                                                    <input type="text" class="form-control form-control-sm" asp-for="Employee.ResidentialAddress.State" placeholder="Enter state">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-sm bg-gradient-primary">Update</button>
                                     </div>
                                 </form>
                             </div>
@@ -439,4 +556,8 @@
     </div>
 </section>
 
+<partial name="_CheckInModal" model="@Model.CheckInModalModel" />
+<partial name="_LeaveModal" model="@Model.LeaveModalModel" />
+<partial name="_QualificationModal" model="@Model.QualificationModalModel" />
+<partial name="_TimesheetModal" model="@Model.TimesheetModalModel" />
 <partial name="_WorkExperienceModal" model="@Model.WorkExperienceModalModel" />

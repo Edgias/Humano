@@ -1,4 +1,5 @@
 ﻿using Edgias.Humano.ApplicationCore.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Edgias.Humano.WebApp.Pages.Employees
 {
@@ -6,40 +7,54 @@ namespace Edgias.Humano.WebApp.Pages.Employees
     {
         public Guid Id { get; set; }
 
-        public string FirstName { get; set; } = string.Empty;
+        public Guid SalutationId { get; set; }
 
-        public string LastName { get; set; } = string.Empty;
+        public EmployeeType EmployeeType { get; set; }
 
-        public string NationalId { get; set; } = string.Empty;
+        public Gender Gender { get; set; }
+
+        public string FirstName { get; set; } = default!;
+
+        public string LastName { get; set; } = default!;
+
+        public string NationalId { get; set; } = default!;
 
         public string? Email { get; set; }
 
-        public string Mobile { get; set; } = string.Empty;
+        public string Mobile { get; set; } = default!;
 
         public DateTime DateOfBirth { get; set; }
 
         public DateTime DateJoined { get; set; }
 
+        public Guid DepartmentId { get; set; }
+
         public int Age { get; set; }
 
         public decimal Salary { get; set; }
 
-        public string Department { get; set; } = string.Empty;
+        public string Department { get; set; } = default!;
+
+        public Guid? ManagerId { get; set; }
 
         public string? Manager { get; set; }
 
-        public string CurrentPosition { get; set; } = string.Empty;
+        public string CurrentPosition { get; set; } = default!;
 
-        public Address ResidentialAddress { get; set; } = null!;
+        public Address ResidentialAddress { get; set; } = default!;
 
-        public IEnumerable<EmployeeCheckInModel> CheckIns { get; set; }
+        public SelectList? Salutations { get; set; }
+        public SelectList? Departments { get; set; }
+        public SelectList? Managers { get; set; }
 
-        public IEnumerable<EmployeeLeaveModel> Leaves { get; set; }
+        public IEnumerable<EmployeeCheckInModel> CheckIns { get; set; } = Enumerable.Empty<EmployeeCheckInModel>();
 
-        public IEnumerable<EmployeeTimesheetModel> Timesheets { get; set; }
+        public IEnumerable<EmployeeLeaveModel> Leaves { get; set; } = Enumerable.Empty<EmployeeLeaveModel>();
 
-        public IEnumerable<EmployeeWorkExperienceModel> WorkExperiences { get; set; }
+        public IEnumerable<EmployeeTimesheetModel> Timesheets { get; set; } = Enumerable.Empty<EmployeeTimesheetModel>();
 
-        public IEnumerable<EmployeeQualificationModel> Qualifications { get; set; }
+        public IEnumerable<EmployeeWorkExperienceModel> WorkExperiences { get; set; } = Enumerable.Empty<EmployeeWorkExperienceModel>();
+
+        public IEnumerable<EmployeeQualificationModel> Qualifications { get; set; } = Enumerable.Empty<EmployeeQualificationModel>();
     }
 }

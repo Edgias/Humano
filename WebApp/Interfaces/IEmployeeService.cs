@@ -4,14 +4,20 @@ namespace Edgias.Humano.WebApp.Interfaces
 {
     public interface IEmployeeService
     {
+        Task AddCheckIn(CheckInModalModel model);
+
+        Task AddLeave(LeaveModalModel model);
+
+        Task AddQualification(QualificationModalModel model);
+
+        Task AddTimesheet(TimesheetModalModel model);
+
+        Task AddWorkExperience(WorkExperienceModalModel model);
+
         Task Create(CreateModel model);
 
-        Task AddWorkExperience(WorkExperienceModalModel workExperience);
-
-        Task AddExperience(NewWorkExperienceModel model);
+        Task<IEnumerable<EmployeeIndexModel>> GetAll();
 
         Task<EmployeeDetailsModel> GetEmployeeWithAllDetailsById(Guid id);
-
-        Task<IEnumerable<EmployeeIndexModel>> GetAll();
     }
 }

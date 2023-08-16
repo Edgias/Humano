@@ -1,5 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model CheckInModalModel
+
+<div class="modal fade" id="check-in-modal">
+    <div class="modal-dialog modal-lg">
+        <form method="post" asp-page-handler="CheckIn">
+            @Html.HiddenFor(we => we.EmployeeId)
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Check In</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="Date" class="col-sm-2 col-form-label">Date <code>*</code></label>
+                        <input type="date" class="form-control form-control-sm" asp-for="Date" placeholder="Enter date">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TimeIn" class="col-sm-2 col-form-label">Time In <code>*</code></label>
+                        <input type="text" class="form-control form-control-sm" asp-for="TimeIn" placeholder="Enter time in">
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

@@ -8,34 +8,67 @@ namespace Edgias.Humano.WebApp.Services
 {
     public class EmployeeService : IEmployeeService
     {
+        private readonly IAsyncRepository<CheckIn> _checkInRepository;
         private readonly IAsyncRepository<Employee> _repository;
+        private readonly IAsyncRepository<Timesheet> _timesheetRepository;
+        private readonly ILeaveService _leaveService;
         
-        public EmployeeService(IAsyncRepository<Employee> repository)
+        public EmployeeService(IAsyncRepository<CheckIn> checkInRepository,
+            IAsyncRepository<Employee> repository,
+            IAsyncRepository<Timesheet> timesheetRepository,
+            ILeaveService leaveService)
         {
+            _checkInRepository = checkInRepository;
             _repository = repository;
+            _timesheetRepository = timesheetRepository;
+            _leaveService = leaveService;
         }
 
-        public async Task AddExperience(NewWorkExperienceModel model)
+        public async Task AddCheckIn(CheckInModalModel model)
         {
-            WorkExperience workExperience = new(model.Salary, model.StartDate, model.EndDate, model.JobTitleId,
-                model.EmployeeId, model.GradeId);
+            CheckIn checkIn = new(model.Date, model.TimeIn, model.TimeOut, model.EmployeeId);
 
-            Employee employee = await _repository.GetByIdAsync(model.EmployeeId);
+            await _checkInRepository.AddAsync(checkIn);
+        }
 
-            employee.AddWorkExperience(workExperience);
+        public async Task AddLeave(LeaveModalModel model)
+        {
+            await _leaveService.AddLeave(model);
+        }
 
-            await _repository.UpdateAsync(employee);
+        public async Task AddQualification(QualificationModalModel model)
+        {
+            Employee? employee = await _repository.GetByIdAsync(model.EmployeeId);
+            EmployeeQualification qualification = new(model.Level, model.School, model.Grade,
+                model.FieldOfStudy, model.StartDate, model.EndDate);
+
+            if (employee is not null)
+            {
+                employee.AddQualification(qualification);
+
+                await _repository.UpdateAsync(employee);
+            }
+        }
+
+        public async Task AddTimesheet(TimesheetModalModel model)
+        {
+            Timesheet timesheet = new(model.Description, model.Date, model.NumberOfHours, model.EmployeeId);
+
+            await _timesheetRepository.AddAsync(timesheet);
         }
 
         public async Task AddWorkExperience(WorkExperienceModalModel model)
         {
-            var employee = await _repository.GetByIdAsync(model.EmployeeId);
+            Employee? employee = await _repository.GetByIdAsync(model.EmployeeId);
             WorkExperience workExperience = new(model.Salary, model.StartDate, model.EndDate,
                 model.JobTitleId, model.EmployeeId, model.GradeId);
 
-            employee.AddWorkExperience(workExperience);
+            if(employee is not null) 
+            {
+                employee.AddWorkExperience(workExperience);
 
-            await _repository.UpdateAsync(employee);
+                await _repository.UpdateAsync(employee);
+            }
         }
 
         public async Task Create(CreateModel model)
@@ -71,11 +104,11 @@ namespace Edgias.Humano.WebApp.Services
 
         public async Task<EmployeeDetailsModel> GetEmployeeWithAllDetailsById(Guid id)
         {
-            var employee = await _repository.FirstOrDefaultAsync(new EmployeeDetailsSpecification(id));
+            Employee? employee = await _repository.FirstOrDefaultAsync(new EmployeeDetailsSpecification(id));
 
             return new EmployeeDetailsModel()
             {
-                Id = employee.Id,
+                Id = employee!.Id,
                 FirstName = employee.FirstName,
                 LastName = employee.LastName,
                 NationalId = employee.NationalId,
@@ -113,7 +146,7 @@ namespace Edgias.Humano.WebApp.Services
                     EndDate = we.EndDate,
                     StartDate = we.StartDate,
                     JobTitle = we.JobTitle.Name,
-                    Salary = 0
+                    Salary = we.Salary
                 }),
                 Leaves = employee.Leaves.Select(l => new EmployeeLeaveModel()
                 {
