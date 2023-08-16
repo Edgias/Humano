@@ -173,8 +173,8 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
-                            <a href="/" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -212,9 +212,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a asp-page="/Benefits/Index" class="nav-link">
                                 <i class="fas fa-user-shield nav-icon"></i>
-                                <p>Retirement packs</p>
+                                <p>Benefits</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -346,6 +346,17 @@
                 options: stackedBarChartOptions
             })
         })
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href').toLowerCase() === location.pathname.toLowerCase()) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        })
+
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
