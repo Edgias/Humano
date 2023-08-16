@@ -5,6 +5,7 @@ using System.Reflection;
 using Edgias.Humano.ApplicationCore.Entities;
 using Edgias.Humano.ApplicationCore.Interfaces;
 using Edgias.Humano.Infrastructure.Identity;
+using System.Data.Common;
 
 namespace Edgias.Humano.Infrastructure.Data
 {
@@ -20,6 +21,8 @@ namespace Edgias.Humano.Infrastructure.Data
         }
 
         public DbSet<Benefit> Benefits { get; set; }
+
+        public DbSet<CalendarSetting> CalendarSettings { get; set; }
 
         public DbSet<CheckIn> CheckIns { get; set; }
 
