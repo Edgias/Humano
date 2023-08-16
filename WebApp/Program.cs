@@ -41,7 +41,6 @@ builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 builder.Services.AddScoped<ICalendarRulesService, CalendarRulesService>();
 builder.Services.AddScoped<ICheckInService, CheckInService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-builder.Services.AddScoped<IEmployeeQualificationService, EmployeeQualificationService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IGradeService, GradeService>();
 builder.Services.AddScoped<IJobTitleService, JobTitleService>();
