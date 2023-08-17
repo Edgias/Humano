@@ -38,6 +38,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
+builder.Services.AddScoped<IBenefitService, BenefitService>();
 builder.Services.AddScoped<ICalendarRulesService, CalendarRulesService>();
 builder.Services.AddScoped<ICheckInService, CheckInService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
