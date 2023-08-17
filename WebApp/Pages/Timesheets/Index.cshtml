@@ -59,7 +59,11 @@
                                     @foreach (var item in Model.Timesheets)
                                     {
                                         <tr>
-                                            <td>@item.Employee</td>
+                                            <td>
+                                                <a asp-page="/Employees/Details" asp-route-id="@item.EmployeeId">
+                                                    @item.Employee
+                                                </a>
+                                            </td>
                                             <td>@item.Date.ToString("dddd dd-MMM-yyyy")</td>
                                             <td>@item.Description</td>
                                             <td>@item.NumberOfHours</td>

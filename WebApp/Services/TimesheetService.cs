@@ -1,5 +1,6 @@
 ﻿using Edgias.Humano.ApplicationCore.Entities;
 using Edgias.Humano.ApplicationCore.Interfaces;
+using Edgias.Humano.ApplicationCore.Specifications;
 using Edgias.Humano.WebApp.Interfaces;
 using Edgias.Humano.WebApp.Pages.Timesheets;
 
@@ -23,7 +24,7 @@ namespace Edgias.Humano.WebApp.Services
 
         public async Task<IEnumerable<TimesheetIndexModel>> GetAll()
         {
-            IReadOnlyList<Timesheet> timesheets = await _repository.GetAllAsync();
+            IReadOnlyList<Timesheet> timesheets = await _repository.GetAsync(new TimesheetSpecification());
 
             return timesheets.Select(d => new TimesheetIndexModel()
             {

@@ -1,5 +1,6 @@
 ﻿using Edgias.Humano.ApplicationCore.Entities;
 using Edgias.Humano.ApplicationCore.Interfaces;
+using Edgias.Humano.ApplicationCore.Specifications;
 using Edgias.Humano.WebApp.Interfaces;
 using Edgias.Humano.WebApp.Pages.CheckIns;
 
@@ -23,7 +24,7 @@ namespace Edgias.Humano.WebApp.Services
 
         public async Task<IEnumerable<CheckInIndexModel>> GetAll()
         {
-            IReadOnlyList<CheckIn> checkIns = await _repository.GetAllAsync();
+            IReadOnlyList<CheckIn> checkIns = await _repository.GetAsync(new CheckInSpecification());
 
             return checkIns.Select(d => new CheckInIndexModel()
             {
