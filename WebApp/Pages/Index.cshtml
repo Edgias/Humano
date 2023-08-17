@@ -235,6 +235,76 @@
     </div>
 </section>
 
+@section Scripts{
+    <script src="~/lib/Chart.min.js"></script>
+    <script>
+        $(function () {
+            /* ChartJS
+             * -------
+             * Here we will create a few charts using ChartJS
+             */
+
+            var areaChartData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [
+                    {
+                        label: 'Female',
+                        backgroundColor: 'rgba(4,56,139,0.9)',
+                        borderColor: 'rgba(4,56,139,0.7)',
+                        pointRadius: false,
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(4,56,139,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(4,56,139,1)',
+                        data: [50, 40, 45, 70, 80, 51, 60]
+                    },
+                    {
+                        label: 'Male',
+                        backgroundColor: 'rgba(143, 16, 54, 0.8)',
+                        borderColor: 'rgba(210, 214, 54, 0.8)',
+                        pointRadius: false,
+                        pointColor: 'rgba(143, 16, 54, 0.8)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [50, 60, 55, 30, 20, 49, 40]
+                    },
+                ]
+            }
+
+            var barChartData = $.extend(true, {}, areaChartData)
+            var temp0 = areaChartData.datasets[0]
+            var temp1 = areaChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            //---------------------
+            //- STACKED BAR CHART -
+            //---------------------
+            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+            var stackedBarChartData = $.extend(true, {}, barChartData)
+
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+
+            new Chart(stackedBarChartCanvas, {
+                type: 'bar',
+                data: stackedBarChartData,
+                options: stackedBarChartOptions
+            })
+        })
+    </script>
+}
 
 
 

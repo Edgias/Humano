@@ -6,6 +6,7 @@
     var timesheets = Model.Employee.Timesheets;
     var checkIns = Model.Employee.CheckIns;
     var leave = Model.Employee.Leaves;
+    var qualifications = Model.Employee.Qualifications;
 }
 
 <section class="content-header">
@@ -32,32 +33,29 @@
                 <div class="card card-secondary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="/img/user.jpg" alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" src="/img/user.png" alt="User profile picture">
                         </div>
                         <h3 class="profile-username text-center">@Model.Employee.FirstName @Model.Employee.LastName</h3>
                         <p class="text-muted text-center">@Model.Employee.CurrentPosition</p>
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <b>Salary</b> <a class="float-right text-danger">$@Model.Employee.Salary</a>
+                                <b>Salary</b> <a class="float-right">$@Model.Employee.Salary</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Date Joined</b> <a class="float-right">@Model.Employee.DateJoined.ToString("dd-MMM-yyyy")</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Gender</b> <a class="float-right">Male</a>
+                                <b>Department</b> <a class="float-right">@Model.Employee.Department</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Age</b> <a class="float-right">@Model.Employee.Age</a>
+                                <b>Date of Birth</b> <a class="float-right">@Model.Employee.DateOfBirth.ToString("dd-MMM-yyyy")</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Mobile</b> <a class="float-right">@Model.Employee.Mobile</a>
                             </li>
-                            <li class="list-group-item">
-                                <b>Email</b> <a class="float-right">@Model.Employee.Email</a>
-                            </li>
                             
                         </ul>
-                        <a href="#" class="btn btn-info btn-block"><b>Print Card</b></a>
+                        <a href="#" class="btn btn-info btn-block"><b>Retire/Dismiss</b></a>
                     </div>
 
                 </div>
@@ -69,29 +67,28 @@
                     </div>
 
                     <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Education</strong>
-                        <p class="text-muted">
-                            @Model.Employee.ResidentialAddress?.Street, @Model.Employee.ResidentialAddress?.City
-                        </p>
-                        <hr>
                         <strong><i class="fas fa-map-marker-alt mr-1"></i> Residential Address</strong>
                         <p class="text-muted">
                             @Model.Employee.ResidentialAddress?.Street, @Model.Employee.ResidentialAddress?.City
                         </p>
                         <hr>
-                        <strong><i class="fas fa-pencil-alt mr-1"></i> Qualifications</strong>
+                        <strong><i class="fas fa-user-shield mr-1"></i> Next of Kin </strong>
                         <p class="text-muted">
-                            @*@if(Model.Member.Dependants.Any())
-                            {
-                                foreach (var item in Model.Member.Dependants)
-                                {
-                                    <span class="tag tag-info">@item.FirstName @item.LastName</span>
-                                }
-                            }*@
+                            Shamiso Dzinotyiwei, 0775 226 456
                         </p>
-                        @*<hr>
-                        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>*@
+                        <hr>
+                        <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
+                        <p class="text-muted">@Model.Employee.Email</p>
+                        <hr>
+                        @if(Model.Employee.Gender == ApplicationCore.Entities.Gender.Male)
+                        {
+                            <strong><i class="fas fa-male mr-1"></i> Gender</strong>
+                        }
+                        else
+                        {
+                            <strong><i class="fas fa-female mr-1"></i> Gender</strong>
+                        }
+                        <p class="text-muted">@Model.Employee.Gender</p>
                     </div>
 
                 </div>
@@ -103,7 +100,9 @@
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
                             <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#qualifications" data-toggle="tab">Qualifications</a></li>
                             <li class="nav-item"><a class="nav-link" href="#experience" data-toggle="tab">Work Expereience</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#reports" data-toggle="tab">Direct Reports</a></li>
                             <li class="nav-item"><a class="nav-link" href="#checkin" data-toggle="tab">Check Ins</a></li>
                             <li class="nav-item"><a class="nav-link" href="#leave" data-toggle="tab">Leave</a></li>
                             <li class="nav-item"><a class="nav-link" href="#timesheets" data-toggle="tab">Timesheets</a></li>
@@ -112,7 +111,7 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="active tab-pane" id="activity">
+                            <div class="tab-pane active" id="activity">
 
                                 <div class="timeline timeline-inverse">
 
@@ -125,9 +124,18 @@
                                     <div>
                                         <i class="fas fa-arrow-circle-right bg-info"></i>
                                         <div class="timeline-item">
-                                            <span class="time"><i class="far fa-clock"></i> 3 days ago</span>
+                                            <span class="time"><i class="far fa-clock"></i> 8 hours ago</span>
                                             <h3 class="timeline-header border-0">
-                                                <a href="#">@Model.Employee.FirstName</a> made a payment
+                                                <a href="#">@Model.Employee.FirstName</a> clocked in
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-arrow-circle-left bg-info"></i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="far fa-clock"></i> 3 minutes ago</span>
+                                            <h3 class="timeline-header border-0">
+                                                <a href="#">@Model.Employee.FirstName</a> clocked out
                                             </h3>
                                         </div>
                                     </div>
@@ -143,7 +151,7 @@
                                         <div class="timeline-item">
                                             <span class="time"><i class="far fa-clock"></i> 3 days ago</span>
                                             <h3 class="timeline-header border-0">
-                                                <a href="#">@Model.Employee.FirstName</a> made a payment
+                                                <a href="#">@Model.Employee.FirstName</a> clocked in
                                             </h3>
                                         </div>
                                     </div>
@@ -154,30 +162,105 @@
                                 </div>
 
                             </div>
-
-                            <div class="tab-pane" id="experience">
+                            <div class="tab-pane" id="qualifications">
                                 <div class="row">
                                     <div class="col-12">
-                                       @if(workExperience.Any())
+                                        @if (qualifications.Any())
                                         {
-                                             <div class="card">
-                                            <div class="card-header">
-                                                <div class="card-title">
-                                                   <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
-                                                            <i class="fas fa-plus mr-2"></i> Add Position
-                                                   </button>
-                                                </div>
-                                                <div class="card-tools mt-1">
-                                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                                        <div class="input-group-append">
-                                                            <button type="submit" class="btn btn-default">
-                                                                <i class="fas fa-search"></i>
-                                                            </button>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="card-title">
+                                                        <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#qualification-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Qualification
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-tools mt-1">
+                                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                                            <div class="input-group-append">
+                                                                <button type="submit" class="btn btn-default">
+                                                                    <i class="fas fa-search"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-hover text-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>School</th>
+                                                                <th>Level</th>
+                                                                <th>Field of Study</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in qualifications)
+                                                            {
+                                                                <tr>
+                                                                    <td>@item.School</td>
+                                                                    <td>@item.Level.ToString()</td>
+                                                                    <td>@item.FieldOfStufy</td>
+                                                                    <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>@item.EndDate?.ToString("dd-MMM-yyyy")</td>
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
                                             </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="card">
+
+                                                <div class="card-body">
+                                                    <div class="block text-center" style="margin:20px">
+                                                        <object data="~/img/no_data.svg" width="300" height="100"></object>
+                                                        <br />
+                                                        <span class="h3 text-muted">No Qualifications</span><br />
+                                                        <span class="text-muted text-sm">Use the 'Add Qualification' button below to add a qualification.</span>
+                                                        <br /><br/><br/>
+                                                        <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#qualification-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Qualification
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="experience">
+                                <div class="row">
+                                    <div class="col-12">
+                                        @if (workExperience.Any())
+                                        {
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="card-title">
+                                                        <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Position
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-tools mt-1">
+                                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                                            <div class="input-group-append">
+                                                                <button type="submit" class="btn btn-default">
+                                                                    <i class="fas fa-search"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-hover text-nowrap">
@@ -187,6 +270,88 @@
                                                                 <th>Start Date</th>
                                                                 <th>End Date</th>
                                                                 <th>Salary</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in workExperience)
+                                                            {
+                                                                <tr>
+                                                                    <td>@item.JobTitle</td>
+                                                                    <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>@item.EndDate?.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>$@item.Salary</td>
+                                                                    <td>
+                                                                        <a class="text-dark mr-2" title="Add Benefits" asp-page="/Departments/Edit" asp-route-id="@item.JobTitle">
+                                                                            <i class="fas fa-coins"></i>
+                                                                        </a>
+                                                                        <a class="text-danger" title="delete" href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="card">
+
+                                                <div class="card-body">
+                                                    <div class="block text-center" style="margin:20px">
+                                                        <object data="~/img/no_data.svg" width="300" height="100"></object>
+                                                        <br />
+                                                        <span class="h3 text-muted">No Payments</span><br />
+                                                        <span class="text-muted text-sm">Use the 'Add Position' button below to add a position.</span><br />
+                                                        <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Position
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="reports">
+                                <div class="row">
+                                    <div class="col-12">
+                                        @if (workExperience.Any())
+                                        {
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="card-title">
+                                                        <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Direct Report
+                                                        </button>
+                                                    </div>
+                                                    <div class="card-tools mt-1">
+                                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                                            <div class="input-group-append">
+                                                                <button type="submit" class="btn btn-default">
+                                                                    <i class="fas fa-search"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-hover text-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Employee</th>
+                                                                <th>Date Joined</th>
+                                                                <th>Position</th>
+                                                                <th>Mobile</th>
+                                                                <th>Gender</th>
+                                                                <th>Age</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -204,7 +369,7 @@
                                                     </table>
                                                 </div>
 
-                                        </div>
+                                            </div>
 
                                         }
                                         else
