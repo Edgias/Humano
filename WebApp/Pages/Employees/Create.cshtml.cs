@@ -79,6 +79,8 @@ namespace Edgias.Humano.WebApp.Pages.Employees
         {
             var departments = await _departmentService.GetAll();
             var salutations = await _salutationService.GetAll();
+            var employees = await _employeeService.GetAll();
+            Managers = new SelectList(employees.Select(d => new { d.Id, Name = $"{d.FirstName} {d.LastName}({d.NationalId})" }), "Id", "Name");
             Salutations = new SelectList(salutations, "Id", "Name");
             Departments = new SelectList(departments, "Id", "Name");
         }

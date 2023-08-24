@@ -47,14 +47,26 @@ namespace Edgias.Humano.WebApp.Pages.Employees
         public SelectList? Departments { get; set; }
         public SelectList? Managers { get; set; }
 
-        public IEnumerable<EmployeeCheckInModel> CheckIns { get; set; } = Enumerable.Empty<EmployeeCheckInModel>();
+        public IEnumerable<EmployeeCheckInModel> CheckIns { get; set; } 
 
-        public IEnumerable<EmployeeLeaveModel> Leaves { get; set; } = Enumerable.Empty<EmployeeLeaveModel>();
+        public IEnumerable<EmployeeIndexModel> DirectReports { get; set; }
 
-        public IEnumerable<EmployeeTimesheetModel> Timesheets { get; set; } = Enumerable.Empty<EmployeeTimesheetModel>();
+        public IEnumerable<EmployeeLeaveModel> Leaves { get; set; }
 
-        public IEnumerable<EmployeeWorkExperienceModel> WorkExperiences { get; set; } = Enumerable.Empty<EmployeeWorkExperienceModel>();
+        public IEnumerable<EmployeeTimesheetModel> Timesheets { get; set; }
 
-        public IEnumerable<EmployeeQualificationModel> Qualifications { get; set; } = Enumerable.Empty<EmployeeQualificationModel>();
+        public IEnumerable<EmployeeWorkExperienceModel> WorkExperiences { get; set; }
+
+        public IEnumerable<EmployeeQualificationModel> Qualifications { get; set; }
+
+        public EmployeeDetailsModel()
+        {
+            CheckIns = Enumerable.Empty<EmployeeCheckInModel>();
+            DirectReports = Enumerable.Empty<EmployeeIndexModel>();
+            Leaves = Enumerable.Empty<EmployeeLeaveModel>();
+            Timesheets = Enumerable.Empty<EmployeeTimesheetModel>();
+            WorkExperiences = Enumerable.Empty<EmployeeWorkExperienceModel>();
+            Qualifications = Enumerable.Empty<EmployeeQualificationModel>();
+        }
     }
 }

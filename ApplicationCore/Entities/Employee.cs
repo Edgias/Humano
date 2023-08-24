@@ -39,6 +39,9 @@ namespace Edgias.Humano.ApplicationCore.Entities
         private readonly List<CheckIn> _checkIns = new();
         public IReadOnlyCollection<CheckIn> CheckIns => _checkIns.AsReadOnly();
 
+        private readonly List<Employee> _directReports = new();
+        public IReadOnlyCollection<Employee> DirectReports => _directReports.AsReadOnly();
+
         private readonly List<EmployeeQualification> _employeeQualifications = new();
         public IReadOnlyCollection<EmployeeQualification> EmployeeQualifications => _employeeQualifications.AsReadOnly();
 

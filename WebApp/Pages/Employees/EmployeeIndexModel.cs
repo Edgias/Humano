@@ -1,8 +1,12 @@
-﻿namespace Edgias.Humano.WebApp.Pages.Employees
+﻿using Edgias.Humano.ApplicationCore.Entities;
+
+namespace Edgias.Humano.WebApp.Pages.Employees
 {
     public class EmployeeIndexModel
     {
         public Guid Id { get; set; }
+
+        public Gender Gender { get; set; }
 
         public string Salutation { get; set; } = string.Empty;
 

@@ -75,8 +75,8 @@ namespace Edgias.Humano.WebApp.Services
         {
             Address address = new(model.Street, model.City, model.State, model.Country);
             Employee employee = new(model.SalutationId, model.FirstName, model.LastName, model.Gender
-                , model.EmployeeType,model.NationalId,model.Mobile,model.Email,model.DateOfBirth,
-                model.DateJoined,model.DepartmentId,null,address);
+                , model.EmployeeType, model.NationalId, model.Mobile, model.Email, model.DateOfBirth,
+                model.DateJoined, model.DepartmentId, model.ManagerId, address);
 
             await _repository.AddAsync(employee);
         }
@@ -118,13 +118,26 @@ namespace Edgias.Humano.WebApp.Services
                 Department = employee.Department.Name,
                 Email = employee.Email,
                 Mobile = employee.Mobile,
-                Manager = $"{employee.Manager?.FirstName} {employee.Manager?.LastName}",
+                ManagerId = employee.ManagerId,
+                Manager = employee.Manager != default ? $"{employee.Manager?.FirstName} {employee.Manager?.LastName}" : "--",
                 ResidentialAddress = employee.ResidentialAddress,
                 CheckIns = employee.CheckIns.Select(c => new EmployeeCheckInModel()
                 {
                     Date = c.Date,
                     TimeIn = c.TimeIn,
                     TimeOut = c.TimeOut
+                }),
+                DirectReports = employee.DirectReports.Select(dr => new EmployeeIndexModel()
+                {
+                    Id = dr.Id,
+                    FirstName = dr.FirstName,
+                    LastName = dr.LastName,
+                    DateJoined = dr.DateJoined,
+                    DateOfBirth = dr.DateOfBirth,
+                    Age = dr.Age(),
+                    Email = dr.Email,
+                    Mobile = dr.Mobile,
+                    Gender = dr.Gender,
                 }),
                 Qualifications = employee.EmployeeQualifications.Select(q => new EmployeeQualificationModel()
                 {

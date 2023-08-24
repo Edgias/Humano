@@ -7,6 +7,7 @@
     var checkIns = Model.Employee.CheckIns;
     var leave = Model.Employee.Leaves;
     var qualifications = Model.Employee.Qualifications;
+    var directReports = Model.Employee.DirectReports;
 }
 
 <section class="content-header">
@@ -51,7 +52,7 @@
                                 <b>Date of Birth</b> <a class="float-right">@Model.Employee.DateOfBirth.ToString("dd-MMM-yyyy")</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Mobile</b> <a class="float-right">@Model.Employee.Mobile</a>
+                                <b>Manager</b> <a class="float-right" asp-page="/Employees/Details" asp-route-id="@Model.Employee.ManagerId">@Model.Employee.Manager</a>
                             </li>
                             
                         </ul>
@@ -76,6 +77,9 @@
                         <p class="text-muted">
                             Shamiso Dzinotyiwei, 0775 226 456
                         </p>
+                        <hr>
+                        <strong><i class="fas fa-phone mr-1"></i> Mobile</strong>
+                        <p class="text-muted">@Model.Employee.Mobile</p>
                         <hr>
                         <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
                         <p class="text-muted">@Model.Employee.Email</p>
@@ -305,7 +309,7 @@
                                                     <div class="block text-center" style="margin:20px">
                                                         <object data="~/img/no_data.svg" width="300" height="100"></object>
                                                         <br />
-                                                        <span class="h3 text-muted">No Payments</span><br />
+                                                        <span class="h3 text-muted">No Positions</span><br />
                                                         <span class="text-muted text-sm">Use the 'Add Position' button below to add a position.</span><br />
                                                         <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
                                                             <i class="fas fa-plus mr-2"></i> Add Position
@@ -321,12 +325,12 @@
                             <div class="tab-pane" id="reports">
                                 <div class="row">
                                     <div class="col-12">
-                                        @if (workExperience.Any())
+                                        @if (directReports.Any())
                                         {
                                             <div class="card">
                                                 <div class="card-header">
                                                     <div class="card-title">
-                                                        <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
+                                                        <button type="button" class="btn btn-sm btn-block bg-gradient-primary" data-toggle="modal" data-target="#direct-report-modal">
                                                             <i class="fas fa-plus mr-2"></i> Add Direct Report
                                                         </button>
                                                     </div>
@@ -346,22 +350,24 @@
                                                     <table class="table table-hover text-nowrap">
                                                         <thead>
                                                             <tr>
-                                                                <th>Employee</th>
-                                                                <th>Date Joined</th>
-                                                                <th>Position</th>
-                                                                <th>Mobile</th>
+                                                                <th>Name</th>
                                                                 <th>Gender</th>
+                                                                <th>Date Joined</th>
+                                                                <th>Mobile</th>
+                                                                <th>Email</th>
                                                                 <th>Age</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach (var item in workExperience)
+                                                            @foreach (var item in directReports)
                                                             {
                                                                 <tr>
-                                                                    <td>@item.JobTitle</td>
-                                                                    <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
-                                                                    <td>@item.EndDate?.ToString("dd-MMM-yyyy")</td>
-                                                                    <td>$@item.Salary</td>
+                                                                    <td>@item.FirstName @item.LastName</td>
+                                                                    <td>@item.Gender</td>
+                                                                    <td>@item.DateJoined.ToString("dd-MMM-yyyy")</td>
+                                                                    <td>@item.Mobile</td>
+                                                                    <td>$@item.Email</td>
+                                                                    <td><span class="badge badge-info">@item.Age</span></td>
                                                                 </tr>
                                                             }
 
@@ -380,10 +386,10 @@
                                                     <div class="block text-center" style="margin:20px">
                                                         <object data="~/img/no_data.svg" width="300" height="100"></object>
                                                         <br />
-                                                        <span class="h3 text-muted">No Payments</span><br />
-                                                        <span class="text-muted text-sm">Use the 'Add Position' button below to add a position.</span><br />
-                                                        <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#work-experience-modal">
-                                                            <i class="fas fa-plus mr-2"></i> Add Position
+                                                        <span class="h3 text-muted">No Direct Reports</span><br />
+                                                        <span class="text-muted text-sm">Use the 'Add Direct Report' button below to add a direct report.</span><br />
+                                                        <button type="button" class="btn btn-sm bg-gradient-primary" data-toggle="modal" data-target="#direct-report-modal">
+                                                            <i class="fas fa-plus mr-2"></i> Add Direct Report
                                                         </button>
                                                     </div>
                                                 </div>
