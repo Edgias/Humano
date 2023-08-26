@@ -17,12 +17,18 @@
                         <input type="date" class="form-control form-control-sm" asp-for="Date" placeholder="Enter date">
                     </div>
                     <div class="form-group">
-                        <label asp-for="NumberOfHours" class="col-sm-2 col-form-label">Number of Hours <code>*</code></label>
+                        <label asp-for="NumberOfHours" class="col-sm-3 col-form-label">Number of Hours <code>*</code></label>
                         <input type="number" class="form-control form-control-sm" asp-for="NumberOfHours" placeholder="Enter hours">
                     </div>
                     <div class="form-group">
                         <label asp-for="Description" class="col-sm-3 col-form-label">Description <code>*</code></label>
                         <textarea rows="5" class="form-control form-control-sm" asp-for="Description" placeholder="Enter description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProjectId" class="col-sm-3 col-form-label">Project </label>
+                        <select class="form-control" asp-for="ProjectId" asp-items="Model.Projects">
+                            <option value="">Please select</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">

@@ -1,0 +1,111 @@
+﻿@page
+@model CreateModel
+@{
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>New Project</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-page="/Projects/Index">Projects</a></li>
+                    <li class="breadcrumb-item active">New Project</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-info">
+
+                    <form id="addProjectForm" method="post" class="form-horizontal">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Name" class="col-sm-2 col-form-label">Name <code>*</code></label>
+                                <input type="text" class="form-control form-control-sm" asp-for="Name" placeholder="Enter name">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="col-sm-2 col-form-label">Description <code>*</code></label>
+                                <textarea rows="5" type="number" class="form-control form-control-sm" asp-for="Description" 
+                                placeholder="Enter project description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="StartDate" class="col-sm-2 col-form-label">Start Date <code>*</code></label>
+                                <input type="date" class="form-control form-control-sm" asp-for="StartDate" placeholder="Enter start date">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EndDate" class="col-sm-2 col-form-label">End Date </label>
+                                <input type="date" class="form-control form-control-sm" asp-for="EndDate" placeholder="Enter end date">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Duration" class="col-sm-2 col-form-label">Duration (days) <code>*</code></label>
+                                <input type="number" class="form-control form-control-sm" asp-for="Duration" placeholder="Enter duration">
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-sm bg-gradient-primary">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $('#addProjectForm').validate({
+                rules: {
+                    Name: {
+                        required: true,
+                    },
+                    Description: {
+                        required: true,
+                    },
+                    StartDate: {
+                        required: true,
+                    },
+                    Duration: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    Name: {
+                        required: "Please enter project name"
+                    },
+                    Description: {
+                        required: "Please enter project description"
+                    },
+                    StartDate: {
+                        required: "Please enter project start date"
+                    },
+                    Duration: {
+                        required: "Please enter project duration"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+}

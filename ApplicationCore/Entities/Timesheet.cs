@@ -14,13 +14,18 @@ namespace Edgias.Humano.ApplicationCore.Entities
 
         public Employee Employee { get; private set; } = null!;
 
+        public Guid? ProjectId { get; private set; }
+
+        public Project Project { get; private set; } = null!;
+
         public Timesheet(string description, DateTime date, int numberOfHours,
-            Guid employeeId)
+            Guid employeeId, Guid? projectId)
         {
             Description = description;
             Date = date;
             NumberOfHours = numberOfHours;
             EmployeeId = employeeId;
+            ProjectId = projectId;
         }
     }
 }

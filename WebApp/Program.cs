@@ -47,6 +47,8 @@ builder.Services.AddScoped<IGradeService, GradeService>();
 builder.Services.AddScoped<IJobTitleService, JobTitleService>();
 builder.Services.AddScoped<ILeaveService, LeaveService>();
 builder.Services.AddScoped<ILeaveCategoryService, LeaveCategoryService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IRateService, RateService>();
 builder.Services.AddScoped<ISalutationService, SalutationService>();
 builder.Services.AddScoped<ITimesheetService, TimesheetService>();
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Edgias.Humano.WebApp.Pages.Employees
 {
@@ -15,5 +16,9 @@ namespace Edgias.Humano.WebApp.Pages.Employees
 
         [Required]
         public Guid EmployeeId { get; set; }
+
+        public Guid? ProjectId { get; set; }
+
+        public SelectList? Projects { get; set; }
     }
 }

@@ -44,6 +44,10 @@ namespace Edgias.Humano.Infrastructure.Data
 
         public DbSet<LeaveDay> LeaveDays { get; set; }
 
+        public DbSet<Project> Projects { get; set; }
+
+        public DbSet<Rate> Rates { get; set; }
+
         public DbSet<SalaryAdjustment> SalaryAdjustments { get; set; }
 
         public DbSet<Salutation> Salutations { get; set; }

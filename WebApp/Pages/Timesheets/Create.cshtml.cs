@@ -18,6 +18,9 @@ namespace Edgias.Humano.WebApp.Pages.Timesheets
         [BindProperty]
         public Guid EmployeeId { get; set; }
 
+        [BindProperty]
+        public Guid? ProjectId { get; set; }
+
         private readonly ITimesheetService _timesheetService;
 
         public CreateModel(ITimesheetService timesheetService)

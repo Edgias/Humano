@@ -28,17 +28,19 @@ namespace Edgias.Humano.WebApp.Pages.Employees
         private readonly IJobTitleService _jobTitleService;
         private readonly IGradeService _gradeService;
         private readonly ILeaveCategoryService _leaveCategoryService;
+        private readonly IProjectService _projectService;
 
         public DetailsModel(IEmployeeService employeeService,
             IJobTitleService jobTitleService,
             IGradeService gradeService,
-            ILeaveCategoryService leaveCategoryService)
+            ILeaveCategoryService leaveCategoryService,
+            IProjectService projectService)
         {
             _employeeService = employeeService;    
             _jobTitleService = jobTitleService;
             _gradeService = gradeService;
             _leaveCategoryService = leaveCategoryService;
-            //WorkExperienceModalModel = new WorkExperienceModalModel();
+            _projectService = projectService;
         }
 
         public async Task OnGet(Guid id)
@@ -47,6 +49,7 @@ namespace Edgias.Humano.WebApp.Pages.Employees
             var jobTitles = await _jobTitleService.GetAll();
             var grades = await _gradeService.GetAll();
             var leaveCategories = await _leaveCategoryService.GetAll();
+            var projects = await _projectService.GetAll();
             var durations = new List<string>() { "All Day", "Half Day" };
 
             CheckInModalModel.EmployeeId = id;
@@ -54,6 +57,7 @@ namespace Edgias.Humano.WebApp.Pages.Employees
             LeaveModalModel.Durations = new SelectList(durations.Select(d => new { Id = d, Name = d }), "Id", "Name");
             QualificationModalModel.EmployeeId = id;
             TimesheetModalModel.EmployeeId = id;
+            TimesheetModalModel.Projects = new SelectList(projects, "Id", "Name");
             WorkExperienceModalModel.EmployeeId = id;
             LeaveModalModel.LeaveCategories = new SelectList(leaveCategories, "Id", "Name");
             WorkExperienceModalModel.JobTitles = new SelectList(jobTitles, "Id", "Name");

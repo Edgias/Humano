@@ -1,0 +1,107 @@
+﻿@page
+@model IndexModel
+@{
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Rates</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-page="/Settings">Settings</a></li>
+                    <li class="breadcrumb-item active">Rates</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                @if (Model.Rates.Any())
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <a asp-page="/Rates/Create" class="btn btn-sm btn-block bg-gradient-primary">
+                                    <i class="fas fa-plus mr-2"></i>New Rate
+                                </a>
+                            </div>
+                            <div class="card-tools mt-1">
+                                <div class="input-group input-group-sm" style="width: 400px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Rates)
+                                    {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td>@item.Amount.ToString("N")</td>
+                                            <td>
+                                                <a class="text-dark mr-2" title="edit" asp-page="./Edit" asp-route-id="@item.Id">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                                <a class="text-danger" title="delete" href="#"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @*<div class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                    </ul>
+                    </div>*@
+                    </div>
+                }
+                else
+                {
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="block text-center" style="margin:20px">
+                                <object data="~/img/no_data.svg" width="300" height="100"></object>
+                                <br />
+                                <span class="h3 text-muted">No Rates</span><br />
+                                <span class="text-muted text-sm">Use the 'New Rate' button below to create a rate.</span><br />
+                                <a asp-page="/Rates/Create" class="btn btn-sm bg-gradient-primary mt-2">
+                                    <i class="fas fa-plus mr-2"></i>New Rate
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -17,7 +17,8 @@ namespace Edgias.Humano.WebApp.Services
 
         public async Task Create(CreateModel model)
         {
-            Timesheet timesheet = new(model.Description, model.Date, model.NumberOfHours, model.EmployeeId);
+            Timesheet timesheet = new(model.Description, model.Date, model.NumberOfHours, 
+                model.EmployeeId, model.ProjectId);
 
             await _repository.AddAsync(timesheet);
         }
